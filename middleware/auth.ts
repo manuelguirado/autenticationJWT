@@ -1,7 +1,8 @@
-import {Rquest, Response, NextFunction} from "express";
+import { user } from './../models/user';
+import {Request, Response, NextFunction} from "express";
 import jwt from "jsonwebtoken";
 //create a middleware to check if the user is authenticated
-export const authToken = (req: Rquest, res: Response, next: NextFunction) => {
+export const authToken = (req: Request, res: Response, next: NextFunction) => {
     //get the token from the header
     const token = req.header('Authorizacion')?.replace('Bearer ', '');
     //check if the token is valid
@@ -18,7 +19,7 @@ export const authToken = (req: Rquest, res: Response, next: NextFunction) => {
             })
         }
         //set the user in the request
-        req.user = decoded;
+        req.body.user = decoded;
         next();
     })
 }

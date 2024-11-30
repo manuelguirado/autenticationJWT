@@ -1,6 +1,8 @@
 
+
 //import depdencies to be used 
-import express from "express";
+import express, { Request, Response } from "express";
+
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { user } from "../models/user";
@@ -14,7 +16,7 @@ const user : user[] = [
     }
 ]
 //route for the login 
-router.Post("/login",  (req, res) => {
+router.post("/login",  (req : Request,res : Response) => {
     //send the data for the user 
     const { name, password } = req.body;
     //find the user
@@ -27,7 +29,7 @@ router.Post("/login",  (req, res) => {
     //check the password
     bcrypt.compare(password, findUser.password, (err, result) => {
         if ( err || !result) {
-            return res.Status(401).json({
+            return res.status(401).json({
                 "message": "password incorrect"
             })
         }

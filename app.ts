@@ -1,4 +1,5 @@
-import { express } from 'express';
+
+import express from 'express';
 import bodyParser from 'body-parser';
 import authRouter from './routes/auth';
 import profileRouter from './routes/profile';

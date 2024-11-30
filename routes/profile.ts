@@ -5,6 +5,6 @@ const router = express.Router();
 //create a route for the profile
 router.get("/profile", authToken, (req: Request, res: Response) => {
     //send the user
-    res.json({message: "profile", user: req.user})
+    res.json({message: "profile", user: req.body.user})
 })
-export default router
+export default router    
