@@ -2,10 +2,13 @@
 
 //import depdencies to be used 
 import express, { Request, Response } from "express";
+import path from "path";
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { user } from "../models/user";
+const app = express();
+app.use(express.static(path.join(__dirname, '/pages/login.html')));
 //create a router
 const router = express.Router();
 //create a user

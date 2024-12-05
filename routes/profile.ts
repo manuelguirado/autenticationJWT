@@ -1,5 +1,8 @@
 import express, { Request, Response } from "express";
+import path from "path";
 import { authToken } from "../middleware/auth";
+const app = express();
+app.use(express.static(path.join(__dirname, '/pages/profile.html')));
 //create a router
 const router = express.Router();
 //create a route for the profile
