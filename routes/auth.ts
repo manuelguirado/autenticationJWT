@@ -8,7 +8,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { user } from "../models/user";
 const app = express();
-app.use(express.static(path.join(__dirname, '/pages/login.html')));
+app.use(express.static(path.join(__dirname, '/pages')));
 //create a router
 const router = express.Router();
 //create a user
@@ -19,7 +19,7 @@ const user : user[] = [
     }
 ]
 //route for the login 
-router.post("/login",  (req : Request,res : Response) => {
+router.post("/",  (req : Request,res : Response) => {
     //send the data for the user 
     const { name, password } = req.body;
     //find the user
