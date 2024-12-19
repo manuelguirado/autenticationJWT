@@ -1,8 +1,11 @@
 import { user } from './../models/user';
 import {Request, Response, NextFunction} from "express";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
+interface authenticatedUser extends Request {
+    user?: string | JwtPayload
+}
 //create a middleware to check if the user is authenticated
-export const auth = (req: Request, res: Response, next: NextFunction) => {
+export const auth = (req: authenticatedUser, res: Response, next: NextFunction) => {
     const  { name, password } = req.body;
     if ( !name || !password ) {
         return res.status(400).json({

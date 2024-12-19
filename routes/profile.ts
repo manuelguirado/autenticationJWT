@@ -1,5 +1,5 @@
 import  jwt  from 'jsonwebtoken';
-import express, { Request, Response } from "express";
+import express, { Request, Response,NextFunction } from "express";
 import path from "path";
 import  auth  from "../middleware/auth";
 const app = express();
@@ -7,7 +7,7 @@ app.use(express.static(path.join(__dirname, '/pages/profile.html')));
 //create a router
 const router = express.Router();
 //middleware to check the token
-app.use((req : Request, res, next) => {
+app.use((req : Request, res : Response, next : NextFunction)  : any => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
         return res.status(401).json({
@@ -27,10 +27,10 @@ app.use((req : Request, res, next) => {
     
 })
 //create a route for the profile
-router.get("/profile",auth, (req: Request, res: Response) => {
+router.get("/profile",  auth , (req: Request, res: Response) => {
     //send the user
     res.sendFile(path.join(__dirname, '/pages/profile.html'));
-    res.json({message: "welcome to the profile", user: req.body.user})
+
   
 })
 
