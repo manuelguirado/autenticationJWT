@@ -1,15 +1,31 @@
 async function fetchProfile() {
     const token = localStorage.getItem("token");
-    const response = await fetch("http://localhost:3000/profile", {
+    if (!token){
+      alert("You are not logged in");
+      window.location.href = "index.html";
+      return;
+    }
+    try {
+      const response = await fetch("http://localhost:3000/profile ", {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${token}`
         }
     });
-  const profile = document.getElementById("profile");
+
   if (response.ok) {
     const data = await response.json();
-    profile.innerHTML = `<p>Name: ${data.user.name}</p>`;
+   document.getElementById("profile").innerHTML = `<p>${data.name}</p>`
+  }else{
+    alert("cannot fetch profile")
+    window.location.href = "login.html";
+  }
+
+  
+}catch (error) {
+    console.error(error);
+    alert("cannot fetch profile")
+    window.location.href = "login.html";
   }
 }
 

@@ -1,5 +1,3 @@
-
-
 //import depdencies to be used 
 import express, { Request, Response } from "express";
 import path from "path";
@@ -22,7 +20,8 @@ const user : user[] = [
 router.post("/",  (req : Request,res : Response) => {
     //send the data for the user 
     const { name, password } = req.body;
-    //find the user
+    
+        //find the user
     const findUser = user.find((user) => user.name === name);
     if (!findUser) {
         return res.status(401).json({
@@ -47,6 +46,7 @@ const token = jwt.sign({
 res.json({
     "token": token
 })
+res.sendFile(path.join(__dirname, '/pages/profile.html'));
 })
 
 export default router;

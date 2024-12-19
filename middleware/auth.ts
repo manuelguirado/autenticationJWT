@@ -2,9 +2,17 @@ import { user } from './../models/user';
 import {Request, Response, NextFunction} from "express";
 import jwt from "jsonwebtoken";
 //create a middleware to check if the user is authenticated
-export const authToken = (req: Request, res: Response, next: NextFunction) => {
+export const auth = (req: Request, res: Response, next: NextFunction) => {
+    const  { name, password } = req.body;
+    if ( !name || !password ) {
+        return res.status(400).json({
+            "message": "name and password are required"
+        })
+    }
+     
+
     //get the token from the header
-    const token = req.header('Authorizacion')?.replace('Bearer ', '');
+    const token = req.header('Authorization')?.replace('Bearer ', '');
     //check if the token is valid
     if ( !token ) { 
         return res.status(401).json({
@@ -23,3 +31,4 @@ export const authToken = (req: Request, res: Response, next: NextFunction) => {
         next();
     })
 }
+export default auth;
